@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayou AI Solutions - Transform Your Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .solution-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .solution-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .solution-card h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .solution-card p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #22c55e;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .cta-button.construction {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+        }
+        
+        .cta-button.construction:hover {
+            box-shadow: 0 10px 20px rgba(234, 88, 12, 0.3);
+        }
+        
+        .demo-section {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .demo-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .demo-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer p {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Bayou AI Solutions</h1>
+            <p>Transform your business operations with custom AI assistants that save 15-20 hours weekly</p>
+        </div>
+        
+        <div class="solutions-grid">
+            <!-- Insurance Solution -->
+            <div class="solution-card">
+                <div class="solution-icon">🏢</div>
+                <h2>Insurance Agency Assistant</h2>
+                <p>Automate form generation, customer lookups, policy management, and daily reporting. Perfect for insurance agents who want to focus on sales instead of paperwork.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Hours Saved Weekly</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Error Reduction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">3x</div>
+                        <div class="stat-label">Faster Processing</div>
+                    </div>
+                </div>
+                
+                <a href="/insurance" class="cta-button">
+                    📊 View Insurance Solution
+                </a>
+            </div>
+            
+            <!-- Construction Solution -->
+            <div class="solution-card">
+                <div class="solution-icon">🏗️</div>
+                <h2>Construction Management Assistant</h2>
+                <p>End the 20-hour paperwork nightmare with automated contract generation, subcontractor management, and project tracking designed for construction businesses.</p>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">17+</div>
+                        <div class="stat-label">Hours Saved Weekly</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Paperwork Reduction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$50K+</div>
+                        <div class="stat-label">Annual Time Value</div>
+                    </div>
+                </div>
+                
+                <a href="/construction" class="cta-button construction">
+                    🏗️ View Construction Solution
+                </a>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h3>🎬 Coming Soon</h3>
+            <p>Interactive demos and walkthrough videos for each industry solution are in development</p>
+            <div style="padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 1rem;">
+                <p style="font-size: 1rem; opacity: 0.8;">Live demos will be available soon - stay tuned!</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Bayou AI Solutions • Transforming businesses through intelligent automation</p>
+        </div>
+    </div>
+</body>
+</html>
