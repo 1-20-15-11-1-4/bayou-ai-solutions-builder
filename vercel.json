@@ -4,14 +4,6 @@
     {
       "src": "**/*.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.js",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -24,43 +16,12 @@
       "dest": "/industries/insurance/pitch.html"
     },
     {
-      "src": "/insurance/demo",
-      "dest": "/industries/insurance/demo.html"
-    },
-    {
-      "src": "/construction",
+      "src": "/construction", 
       "dest": "/industries/construction/pitch.html"
-    },
-    {
-      "src": "/construction/demo",
-      "dest": "/industries/construction/demo.html"
     },
     {
       "src": "/healthcare",
       "dest": "/industries/healthcare/coming-soon.html"
-    },
-    {
-      "src": "/case-studies",
-      "dest": "/case-studies/success-stories.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
     }
   ]
 }
