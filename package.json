@@ -1,0 +1,13 @@
+{
+  "name": "bayou-ai-solutions-builder",
+  "version": "1.0.0",
+  "description": "Bayou AI Solutions - AI automation for businesses",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["ai", "automation", "business", "productivity", "bayou"],
+  "author": "Bayou AI Solutions",
+  "license": "MIT",
+  "homepage": "https://bayouaisolutions.com"
+}
