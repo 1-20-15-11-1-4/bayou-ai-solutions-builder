@@ -19,11 +19,11 @@
         
         .slide {
             width: 100vw;
-            height: 100vh;
-            padding: 1.5rem;
+            min-height: 100vh;
+            padding: 1rem 2rem 4rem 2rem;
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             position: relative;
             overflow-y: auto;
@@ -39,33 +39,35 @@
             text-align: center;
             color: white;
             z-index: 2;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
         
         .slide h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .slide h2 {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: #fde047;
         }
         
         .slide h3 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #fed7aa;
         }
         
         .slide p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             line-height: 1.6;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             opacity: 0.95;
         }
         
@@ -103,42 +105,52 @@
         
         .pain-points {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
         
         .pain-point {
             background: rgba(220, 38, 38, 0.2);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 10px;
             border-left: 4px solid #dc2626;
         }
         
         .pain-point h4 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: #fca5a5;
+        }
+        
+        .pain-point p {
+            font-size: 1rem;
+            margin-bottom: 0;
         }
         
         .benefits {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1rem;
+            margin: 1.5rem 0;
         }
         
         .benefit {
             background: rgba(34, 197, 94, 0.2);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 10px;
             border-left: 4px solid #22c55e;
         }
         
         .benefit h4 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: #86efac;
+        }
+        
+        .benefit p {
+            font-size: 1rem;
+            margin-bottom: 0;
         }
         
         .demo-features {
