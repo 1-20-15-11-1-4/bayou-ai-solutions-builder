@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Management Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            overflow-x: hidden;
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            padding: 2rem;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .slide-content {
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .slide h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fde047;
+        }
+        
+        .slide h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fed7aa;
+        }
+        
+        .slide p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .pain-point {
+            background: rgba(220, 38, 38, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .pain-point h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fca5a5;
+        }
+        
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .benefit {
+            background: rgba(34, 197, 94, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #22c55e;
+        }
+        
+        .benefit h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #86efac;
+        }
+        
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card {
+            background: rgba(255,255,255,0.15);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid #fde047;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .price {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fde047;
+            margin-bottom: 1rem;
+        }
+        
+        .price-detail {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .roi-calculation {
+            background: rgba(34, 197, 94, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border: 2px solid #22c55e;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .slide-indicator {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #fde047;
+            color: #ea580c;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #facc15;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(253, 224, 71, 0.3);
+        }
+        
+        ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        li {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title Slide -->
+    <div class="slide active">
+        <div class="slide-content">
+            <h1>🏗️ Construction Management Assistant</h1>
+            <h2>End the 20-Hour Paperwork Nightmare</h2>
+            <p>Custom AI Solution for Construction Business Operations</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Hours Saved Weekly</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Paperwork Reduction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$50K+</div>
+                    <div class="stat-label">Annual Time Savings Value</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>💥 The Construction Paperwork Crisis</h2>
+            <p>You didn't start a construction business to be a full-time administrator</p>
+            
+            <div class="pain-points">
+                <div class="pain-point">
+                    <h4>📄 20 Hours Weekly on Paperwork</h4>
+                    <p>Subcontractor contracts, permits, change orders eating your entire business day</p>
+                </div>
+                <div class="pain-point">
+                    <h4>💸 Lost Revenue Opportunities</h4>
+                    <p>Every hour on admin = $200+ not spent on business development</p>
+                </div>
+                <div class="pain-point">
+                    <h4>😤 Subcontractor Management Chaos</h4>
+                    <p>Tracking payments, contracts, and compliance across multiple projects</p>
+                </div>
+                <div class="pain-point">
+                    <h4>🗂️ Document Version Confusion</h4>
+                    <p>Can't tell which contract version is current, leading to costly mistakes</p>
+                </div>
+                <div class="pain-point">
+                    <h4>⏰ After-Hours Office Work</h4>
+                    <p>Evenings and weekends spent catching up on administrative tasks</p>
+                </div>
+                <div class="pain-point">
+                    <h4>🚫 Compliance Stress</h4>
+                    <p>Keeping up with permits, insurance, and regulatory requirements</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Industry Stats -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>📊 Construction Industry Reality</h2>
+            <p>The administrative burden is crushing construction businesses nationwide</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">71</div>
+                    <div class="stat-label">Days annually spent on admin tasks by small businesses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">£35,600</div>
+                    <div class="stat-label">Average annual cost of administrative burden</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Of employees waste 1+ hours daily on non-value admin</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30%</div>
+                    <div class="stat-label">Cost reduction possible with AI automation</div>
+                </div>
+            </div>
+            
+            <div class="roi-calculation">
+                <h3>💰 Your Time Investment Reality Check</h3>
+                <p><strong>Current State:</strong> 20 hours weekly × $125/hour = <span style="color: #dc2626; font-size: 1.4em;">$130,000 annually</span> on paperwork</p>
+                <p><strong>With Our Solution:</strong> 3 hours weekly × $125/hour = <span style="color: #22c55e; font-size: 1.4em;">$19,500 annually</span> on admin</p>
+                <p><strong>Time Recovered:</strong> <span style="color: #fde047; font-size: 1.5em;">$110,000+ value returned to your business</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Our Solution -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>🤖 Your Construction Management Assistant</h2>
+            <p>Purpose-built for construction businesses - not a generic chatbot</p>
+            
+            <div class="demo-features">
+                <div class="feature">
+                    <div class="feature-icon">📋</div>
+                    <h4>Contract Generation</h4>
+                    <p>Subcontractor agreements, change orders, and project contracts in minutes</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <h4>Payment Processing</h4>
+                    <p>Track subcontractor payments, manage invoices, and handle project billing</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h4>Project Management</h4>
+                    <p>Monitor progress, deadlines, and resource allocation across all jobs</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏗️</div>
+                    <h4>Permit Tracking</h4>
+                    <p>Manage permits, inspections, and compliance requirements automatically</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h4>Document Organization</h4>
+                    <p>Intelligent filing system that knows where everything belongs</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h4>Smart Search</h4>
+                    <p>Find any document, contract, or project info with natural language</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Benefits -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>🎯 Transform Your Construction Business</h2>
+            <p>Here's exactly how your workflow changes</p>
+            
+            <div class="benefits">
+                <div class="benefit">
+                    <h4>⚡ 17+ Hours Saved Weekly</h4>
+                    <p>From 20 hours of paperwork down to 3 hours of high-level oversight</p>
+                </div>
+                <div class="benefit">
+                    <h4>💼 Focus on Business Growth</h4>
+                    <p>Spend recovered time on bidding new projects and client relationships</p>
+                </div>
+                <div class="benefit">
+                    <h4>🎯 Zero Administrative Errors</h4>
+                    <p>Eliminate costly mistakes from manual data entry and document mix-ups</p>
+                </div>
+                <div class="benefit">
+                    <h4>📈 Better Project Margins</h4>
+                    <p>Accurate tracking and faster processing improves profitability</p>
+                </div>
+                <div class="benefit">
+                    <h4>🏠 Work-Life Balance</h4>
+                    <p>No more weekend office sessions - administrative work happens during business hours</p>
+                </div>
+                <div class="benefit">
+                    <h4>🚀 Competitive Edge</h4>
+                    <p>Respond to bids faster and manage more projects simultaneously</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Technical Approach -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>🛠 How We Build This For Construction</h2>
+            <p>Transparent process designed specifically for construction workflows</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #fde047;">Week 1: Foundation Setup</h3>
+                    <ul>
+                        <li>Import your contract templates</li>
+                        <li>Set up subcontractor database</li>
+                        <li>Configure project tracking system</li>
+                        <li>Secure data encryption & storage</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #fde047;">Week 2-3: Customization</h3>
+                    <ul>
+                        <li>Train AI on your specific workflows</li>
+                        <li>Build custom forms and processes</li>
+                        <li>Test with your real projects</li>
+                        <li>Create your personal training session</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px;">
+                    <h3 style="color: #fde047;">Ongoing: Excellence</h3>
+                    <ul>
+                        <li>Monthly feature enhancements</li>
+                        <li>Priority technical support</li>
+                        <li>Data backup & security updates</li>
+                        <li>New construction industry features</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roi-calculation">
+                <h3>🔒 Construction-Grade Security</h3>
+                <p>Your project data, contracts, and client information are encrypted and isolated. You maintain complete ownership and control.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Pricing -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>💎 Investment & Return</h2>
+            <p>Professional construction management solution at a fraction of traditional costs</p>
+            
+            <div class="pricing-card">
+                <div class="price">$1,000</div>
+                <div class="price-detail">One-time setup & customization</div>
+                <div style="font-size: 2.5rem; color: #fde047; margin: 1rem 0;">+</div>
+                <div class="price">$1,000</div>
+                <div class="price-detail">Monthly service & support</div>
+                
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <h3 style="color: #22c55e;">Total Monthly: $1,000</h3>
+                    <p style="opacity: 0.9;">Complete Construction Management Assistant</p>
+                </div>
+            </div>
+            
+            <div class="roi-calculation">
+                <h3>📊 ROI Analysis</h3>
+                <p><strong>Time Saved:</strong> 17 hours weekly × $125/hour = $2,125 weekly value</p>
+                <p><strong>Monthly Value:</strong> $9,000+ in time savings</p>
+                <p><strong>Your Investment:</strong> $1,000 monthly</p>
+                <p><strong>Net Benefit:</strong> <span style="color: #22c55e; font-size: 1.5em;">$8,000+ monthly gain</span></p>
+                <p><strong>Annual ROI:</strong> <span style="color: #fde047; font-size: 1.5em;">800%+ return</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Success Stories -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>📚 Real Construction Automation Results</h2>
+            <p>Businesses achieving massive efficiency gains with intelligent automation</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="background: rgba(34, 197, 94, 0.2); padding: 2rem; border-radius: 15px; border: 2px solid #22c55e;">
+                    <h3 style="color: #86efac;">Construction Company A</h3>
+                    <p style="margin: 1rem 0;"><strong>Results with automation:</strong></p>
+                    <ul>
+                        <li>4-hour paperwork process → 4 minutes</li>
+                        <li>Eliminated manual data entry errors</li>
+                        <li>Freed up staff for high-value work</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(34, 197, 94, 0.2); padding: 2rem; border-radius: 15px; border: 2px solid #22c55e;">
+                    <h3 style="color: #86efac;">Digital Construction Platform</h3>
+                    <p style="margin: 1rem 0;"><strong>Industry improvements:</strong></p>
+                    <ul>
+                        <li>Enhanced project efficiency</li>
+                        <li>Reduced manual redundancies</li>
+                        <li>Streamlined communication</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(34, 197, 94, 0.2); padding: 2rem; border-radius: 15px; border: 2px solid #22c55e;">
+                    <h3 style="color: #86efac;">Construction Automation Study</h3>
+                    <p style="margin: 1rem 0;"><strong>Average results:</strong></p>
+                    <ul>
+                        <li>71 days saved annually per business</li>
+                        <li>30% operational cost reduction</li>
+                        <li>Significant productivity gains</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="roi-calculation">
+                <h3>🎯 Construction Industry Trend</h3>
+                <p>Smart construction companies are investing in automation now to stay competitive. The question isn't whether to automate - it's whether you'll be first or last in your market.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Call to Action -->
+    <div class="slide">
+        <div class="slide-content">
+            <h2>🚀 Ready to Eliminate Your Paperwork Nightmare?</h2>
+            <p>Stop spending 20 hours weekly on administration. Start focusing on what builds your business.</p>
+            
+            <div style="background: rgba(255,255,255,0.1); padding: 3rem; border-radius: 20px; margin: 2rem 0;">
+                <h3 style="color: #fde047; margin-bottom: 2rem;">Your Construction Business Transformation:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h4 style="color: #fed7aa;">Before: Current State</h4>
+                        <ul style="text-align: left;">
+                            <li>20 hours weekly on paperwork</li>
+                            <li>Evening and weekend admin work</li>
+                            <li>Missed business opportunities</li>
+                            <li>Document chaos and errors</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: #fed7aa;">After: With Our Solution</h4>
+                        <ul style="text-align: left;">
+                            <li>3 hours weekly oversight</li>
+                            <li>Evenings and weekends free</li>
+                            <li>Time for business development</li>
+                            <li>Organized, error-free operations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-card" style="background: rgba(253, 224, 71, 0.2); border-color: #fde047;">
+                <h3 style="color: #fde047;">Launch Special</h3>
+                <p>$1,000 setup + $1,000/month</p>
+                <p style="font-size: 1rem; opacity: 0.8;">Pays for itself in the first month</p>
+            </div>
+            
+            <button class="cta-button" onclick="alert('Contact Bayou AI Solutions to get started!')">
+                ✅ Yes, Let's End the Paperwork Nightmare!
+            </button>
+            
+            <p style="margin-top: 2rem; font-size: 1.1rem; opacity: 0.9;">
+                Ready to get back to building instead of paperwork?
+            </p>
+        </div>
+    </div>
+
+    <div class="slide-indicator">
+        <span id="current-slide">1</span> / <span id="total-slides">9</span>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+    </script>
+</body>
+</html>
