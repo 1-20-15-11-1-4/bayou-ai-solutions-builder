@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Management AI Assistant - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            height: 100vh;
+            gap: 0;
+        }
+        
+        .guide-panel {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .demo-panel {
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            color: #fde047;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #fde047;
+            padding-bottom: 0.5rem;
+        }
+        
+        .demo-scenario {
+            background: rgba(251, 146, 60, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #f97316;
+        }
+        
+        .demo-scenario h4 {
+            color: #fed7aa;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-scenario p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .quick-test-btn {
+            background: #fde047;
+            color: #ea580c;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-test-btn:hover {
+            background: #facc15;
+            transform: translateY(-1px);
+        }
+        
+        .header {
+            background: #ea580c;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .header .date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+        
+        .sidebar h3 {
+            color: #374151;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #374151;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #e5e7eb;
+            border-color: #ea580c;
+            transform: translateY(-1px);
+        }
+        
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            background: #fcfcfc;
+        }
+        
+        .chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #fafafa;
+        }
+        
+        .chat-header h2 {
+            color: #374151;
+            font-size: 1.1rem;
+        }
+        
+        .messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: 500px;
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .avatar.user {
+            background: #ea580c;
+            color: white;
+        }
+        
+        .avatar.ai {
+            background: #059669;
+            color: white;
+        }
+        
+        .message-bubble {
+            max-width: 75%;
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .message.user .message-bubble {
+            background: #ea580c;
+            color: white;
+        }
+        
+        .message.ai .message-bubble {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: inherit;
+            background: #fafafa;
+        }
+        
+        .message-input:focus {
+            border-color: #ea580c;
+            background: white;
+        }
+        
+        .send-btn {
+            padding: 0.75rem 1.5rem;
+            background: #ea580c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .send-btn:hover {
+            background: #dc2626;
+        }
+        
+        .generated-contract {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .contract-header {
+            background: #ea580c;
+            color: white;
+            padding: 1rem;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .contract-section h4 {
+            color: #ea580c;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #f59e0b;
+            padding-bottom: 0.25rem;
+        }
+        
+        .contract-field {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .field-label {
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .field-input {
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        .quote-result {
+            background: #d1fae5;
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .quote-header {
+            background: #22c55e;
+            color: white;
+            padding: 1rem;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        @media (max-width: 1200px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            
+            .guide-panel {
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="guide-panel">
+            <h2 class="guide-title">🏗️ Trey's Construction Demo</h2>
+            
+            <div class="demo-scenario">
+                <h4>🔥 Opening Hook</h4>
+                <p><strong>Say:</strong> "Trey, watch me eliminate that 20-hour paperwork nightmare. This AI has your entire quote book memorized."</p>
+                <button class="quick-test-btn" onclick="testScenario('hello')">Test Opening</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>📖 Quote Book Demo</h4>
+                <p><strong>Say:</strong> "Remember flipping through that huge book for pricing? Watch this..."</p>
+                <button class="quick-test-btn" onclick="testScenario('What is the cost per square foot for concrete work?')">Test Quote Lookup</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>📋 Contract Generation</h4>
+                <p><strong>Say:</strong> "Instead of 90 minutes writing subcontractor agreements, watch this."</p>
+                <button class="quick-test-btn" onclick="testScenario('Generate electrical contract for Johnson Electric')">Test Contract</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>💰 ROI Close</h4>
+                <p><strong>Say:</strong> "17 hours weekly at $125/hour = $110,000 annually you get back. For $1,000 monthly investment."</p>
+            </div>
+        </div>
+        
+        <div class="demo-panel">
+            <div class="header">
+                <div>
+                    <h1>Trey's Construction Management AI</h1>
+                    <div class="date">Live Demo • August 2, 2025</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    🟢 LIVE SYSTEM
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="sidebar">
+                    <h3>⚡ Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="quickAction('What is the cost per square foot for concrete work?')">📖 Quote Book Lookup</button>
+                        <button class="action-btn" onclick="quickAction('Generate electrical contract')">📋 Generate Contract</button>
+                        <button class="action-btn" onclick="quickAction('Show me all active projects')">🏗️ Project Status</button>
+                        <button class="action-btn" onclick="quickAction('Track subcontractor payments')">💰 Payment Tracking</button>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fef3c7; border-radius: 6px;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #92400e; font-size: 0.9rem;">🏗️ Construction-Specific</h4>
+                        <div style="font-size: 0.8rem; color: #92400e;">
+                            <div>✅ RAG-powered quote book</div>
+                            <div>✅ Contract generation</div>
+                            <div>✅ Project tracking</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-area">
+                    <div class="chat-header">
+                        <h2>🤖 Construction Management Assistant</h2>
+                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.85rem;">Your AI construction operations manager</p>
+                    </div>
+                    
+                    <div class="messages" id="messages">
+                        <div class="message ai">
+                            <div class="avatar ai">🤖</div>
+                            <div class="message-bubble">
+                                Good morning, Trey! I have your entire quote book memorized, can generate any contract in seconds, and track all your projects. What can I help you with today?
+                                <div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">
+                                    9:15 AM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area">
+                        <div class="input-container">
+                            <input type="text" class="message-input" id="messageInput" 
+                                   placeholder="Try: 'What is the cost per square foot for concrete work?'">
+                            <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function testScenario(message) {
+            document.getElementById('messageInput').value = message;
+            sendMessage();
+        }
+        
+        function quickAction(action) {
+            document.getElementById('messageInput').value = action;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                const response = generateResponse(message);
+                addMessage(response, 'ai');
+            }, 1500);
+        }
+        
+        function addMessage(content, type) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = 
+                '<div class="avatar ' + type + '">' + (type === 'user' ? '👤' : '🤖') + '</div>' +
+                '<div class="message-bubble">' +
+                    content +
+                    '<div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">' +
+                        time +
+                    '</div>' +
+                '</div>';
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showLoading() {
+            const messagesDiv = document.getElementById('messages');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.id = 'loading-message';
+            loadingDiv.innerHTML = 
+                '<div class="avatar ai">🤖</div>' +
+                '<div class="message-bubble">' +
+                    '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+                        '<div style="width: 8px; height: 8px; background: #059669; border-radius: 50%; animation: pulse 1s infinite;"></div>' +
+                        'Accessing construction database...' +
+                    '</div>' +
+                '</div>';
+            messagesDiv.appendChild(loadingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideLoading() {
+            const loading = document.getElementById('loading-message');
+            if (loading) {
+                loading.remove();
+            }
+        }
+        
+        function generateResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            if (lowerMessage.includes('cost') || lowerMessage.includes('concrete') || lowerMessage.includes('quote')) {
+                return '📖 <strong>QUOTE BOOK - RAG SYSTEM ACTIVATED</strong>' +
+                    '<div class="quote-result">' +
+                        '<div class="quote-header">🏗️ CONCRETE FOUNDATION PRICING</div>' +
+                        '<strong>Current Market Rates (August 2025):</strong><br><br>' +
+                        '• <strong>Basic Slab:</strong> $6.50 - $8.75 per sq ft<br>' +
+                        '• <strong>Basement Foundation:</strong> $12.00 - $18.00 per sq ft<br>' +
+                        '• <strong>Crawl Space:</strong> $8.00 - $12.00 per sq ft<br><br>' +
+                        '<strong>For 1,200 sq ft slab:</strong><br>' +
+                        '• Base Cost: $7,800 - $10,500<br>' +
+                        '• Your markup (30%): $10,140 - $13,650<br>' +
+                    '</div>' +
+                    '<strong>⚡ Time Saved:</strong> 5+ minutes flipping through books → Instant results';
+            }
+            
+            if (lowerMessage.includes('contract') || lowerMessage.includes('electrical') || lowerMessage.includes('generate')) {
+                return '📋 <strong>ELECTRICAL CONTRACT GENERATED</strong>' +
+                    '<div class="generated-contract">' +
+                        '<div class="contract-header">⚡ ELECTRICAL SUBCONTRACTOR AGREEMENT<br>Johnson Electric - Kitchen Project</div>' +
+                        '<div class="contract-section">' +
+                            '<h4>📋 PROJECT INFO</h4>' +
+                            '<div class="contract-field"><span class="field-label">Project:</span><span class="field-input">Kitchen Remodel - 1247 Oak St</span></div>' +
+                            '<div class="contract-field"><span class="field-label">Contractor:</span><span class="field-input">Trey\'s Construction LLC</span></div>' +
+                            '<div class="contract-field"><span class="field-label">Amount:</span><span class="field-input">$3,250.00</span></div>' +
+                        '</div>' +
+                        '<div class="contract-section">' +
+                            '<h4>⚡ WORK SCOPE</h4>' +
+                            '<div style="font-size: 0.9rem;">• Rough-in wiring for kitchen circuits<br>• Install (4) GFCI outlets<br>• Under-cabinet lighting circuits<br>• Panel upgrade with 20-amp breakers</div>' +
+                        '</div>' +
+                        '<div style="background: #22c55e; color: white; padding: 0.75rem; border-radius: 8px; text-align: center; font-weight: bold; margin-top: 1rem;">' +
+                            '📧 CONTRACT READY - Auto-emailed to Johnson Electric' +
+                        '</div>' +
+                    '</div>' +
+                    '<strong>⚡ Time Saved:</strong> 90 minutes → 30 seconds';
+            }
+            
+            if (lowerMessage.includes('project') || lowerMessage.includes('active')) {
+                return '🏗️ <strong>ACTIVE PROJECTS DASHBOARD</strong><br><br>' +
+                    '📊 <strong>OVERVIEW:</strong> 7 active projects, $347,500 total value<br><br>' +
+                    '<strong>🔥 THIS WEEK PRIORITIES:</strong><br>' +
+                    '• <strong>Johnson Kitchen:</strong> Electrical rough-in Monday<br>' +
+                    '• <strong>Smith Office:</strong> Foundation cured, framing Friday<br>' +
+                    '• <strong>Martinez Bathroom:</strong> Plumbing rough-in complete<br><br>' +
+                    '<strong>👷 SUBCONTRACTOR STATUS:</strong><br>' +
+                    '• Johnson Electric: 2 jobs, payment current<br>' +
+                    '• Rodriguez Plumbing: 3 jobs, invoice pending<br>' +
+                    '• Elite Concrete: 1 job, monitoring quality<br><br>' +
+                    '<strong>💰 This Month Revenue:</strong> $47,500 invoiced';
+            }
+            
+            if (lowerMessage.includes('payment') || lowerMessage.includes('track')) {
+                return '💰 <strong>PAYMENT TRACKING CENTER</strong><br><br>' +
+                    '<strong>📊 OVERVIEW:</strong><br>' +
+                    '• Total Outstanding: $8,475<br>' +
+                    '• Due This Week: $4,075<br>' +
+                    '• Overdue: $0 (Excellent!)<br><br>' +
+                    '<strong>🔥 DUE THIS WEEK:</strong><br>' +
+                    '• <strong>Johnson Electric:</strong> $1,625 (Friday)<br>' +
+                    '• <strong>Rodriguez Plumbing:</strong> $2,450 (Monday)<br><br>' +
+                    '<strong>📈 PAYMENT HISTORY:</strong><br>' +
+                    '• Johnson Electric: $18,450 YTD, always on time<br>' +
+                    '• Rodriguez Plumbing: $24,750 YTD, excellent work<br><br>' +
+                    '<strong>💳 Auto-Payment Rules:</strong><br>' +
+                    '• Under $1,000: Auto-approve if work verified<br>' +
+                    '• Over $1,000: Require your approval';
+            }
+            
+            return '👋 <strong>CONSTRUCTION AI READY</strong><br><br>' +
+                'I eliminate 17+ hours of weekly paperwork for construction businesses.<br><br>' +
+                '<strong>🚀 TRY THESE:</strong><br>' +
+                '• "What\'s the cost per square foot for concrete work?"<br>' +
+                '• "Generate electrical contract"<br>' +
+                '• "Show me all active projects"<br>' +
+                '• "Track subcontractor payments"<br><br>' +
+                '<strong>💡 BUSINESS IMPACT:</strong><br>' +
+                '✅ Save 17+ hours weekly<br>' +
+                '✅ Instant quote book access<br>' +
+                '✅ Never miss payments<br>' +
+                '✅ 1000%+ ROI<br><br>' +
+                'What construction task can I help you with first?';
+        }
+        
+        // Enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('messageInput');
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            input.focus();
+        });
+    </script>
+</body>
+</html>
