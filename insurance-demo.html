@@ -6,266 +6,7 @@
     <title>AI Business Assistant - Insurance Demo</title>
     <style>
         * {
-            
-            // Task Management
-            if (lowerMessage.includes('task') || lowerMessage.includes('today') || lowerMessage.includes('schedule')) {
-                return `
-                    📅 **TODAY'S TASK DASHBOARD - PRIORITY RANKED**
-                    *${new Date().toLocaleDateString()} • ${new Date().toLocaleTimeString()}*
-                    
-                    ## 🔥 **URGENT - DO FIRST**
-                    
-                    **💰 Revenue Critical:**
-                    1. **📞 Call Sarah Johnson** - Policy expires TODAY
-                       - Customer for 8 years, $2,100 annual premium
-                       - Offer 10% loyalty discount to secure renewal
-                       - ⏰ **Deadline:** End of business today
-                    
-                    2. **📧 Follow up 3 hot prospects** - Quotes sent Monday
-                       - Maria Rodriguez: $1,500 auto quote
-                       - David Park: $1,200 home insurance
-                       - Jennifer Wu: $1,500 business insurance
-                       - 💰 **Potential Revenue:** $4,200
-                    
-                    ## 📞 **SCHEDULED APPOINTMENTS**
-                    
-                    **10:00 AM** - New Customer Consultation
-                    • **Client:** Maria Rodriguez
-                    • **Need:** Auto + home insurance bundle
-                    • **Prep:** Pull comparable rates, prepare multi-policy discount
-                    
-                    **2:30 PM** - Claims Review Meeting
-                    • **Michael Chen's case** - rear-end collision
-                    • **Action needed:** Final approval ($2,850 payout)
-                    • **Status:** Ready to approve - clear liability
-                    
-                    **4:00 PM** - Policy Renewal Call
-                    • **Thompson Family** - home insurance renewal
-                    • **Opportunity:** Add umbrella policy discussion
-                    
-                    ## 📝 **ADMINISTRATIVE TASKS** 
-                    
-                    **Quick Wins (30 min total):**
-                    • Update 4 customer contact records *(5 min each)*
-                    • File 6 new applications *(5 min total)*
-                    • Generate monthly commission report *(10 min)*
-                    
-                    ## 💡 **SMART INSIGHTS & RECOMMENDATIONS**
-                    
-                    **Customer Intelligence:**
-                    • Sarah Johnson mentioned buying a vacation home last call - ask about additional property coverage
-                    • Michael Chen has been excellent customer - use claim approval as relationship builder
-                    • Thompson family's daughter just got married - life insurance opportunity
-                    
-                    **Revenue Optimization:**
-                    • 3 customers called about rate increases from competitors - prepare retention offers
-                    • Oak Street development project - 5 new homeowners need insurance quotes
-                    
-                    ## ⏱️ **TIME ALLOCATION RECOMMENDATION**
-                    
-                    **Morning (9-12 PM):** Revenue-focused activities
-                    - Sarah Johnson renewal (30 min)
-                    - Hot prospect follow-ups (45 min)
-                    - New customer consultation (60 min)
-                    
-                    **Afternoon (1-5 PM):** Service & admin
-                    - Claims meeting (60 min)
-                    - Administrative tasks (30 min)
-                    - Thompson renewal call (30 min)
-                    - Prep for tomorrow (30 min)
-                    
-                    **🎯 Daily Goal:** Secure $6,300 in renewals/new business
-                    **📈 Success Metric:** 3 policies renewed/sold today
-                    
-                    Which task would you like me to help you tackle first?
-                `;
-            }
-            
-            // Policy Management
-            if (lowerMessage.includes('policy') || lowerMessage.includes('management')) {
-                return `
-                    📋 **POLICY MANAGEMENT CENTER**
-                    
-                    ## 📊 **PORTFOLIO OVERVIEW**
-                    • **Active Policies:** 342 total
-                    • **Monthly Premium Volume:** $127,450
-                    • **Policy Distribution:** Auto (65%) • Home (20%) • Life (10%) • Business (5%)
-                    
-                    ## 🔄 **RENEWALS & EXPIRATIONS**
-                    
-                    **This Week (URGENT):**
-                    • Sarah Johnson - Auto (expires today) - $2,100/year
-                    • Miller Family - Home (expires Thu) - $1,850/year
-                    • Tech Solutions LLC - Business (expires Fri) - $3,200/year
-                    
-                    **Next 30 Days:**
-                    • 23 policies due for renewal
-                    • Total premium at risk: $42,500
-                    • Historical renewal rate: 91%
-                    
-                    ## 💰 **PRICING & COVERAGE OPTIONS**
-                    
-                    **Auto Insurance Rates:**
-                    • Basic Liability: $89/month
-                    • Standard Coverage: $145/month
-                    • Premium Plus: $198/month
-                    
-                    **Home Insurance Rates:**
-                    • Basic Coverage: $95/month
-                    • Comprehensive: $156/month
-                    • Premium Protection: $224/month
-                    
-                    ## 🎯 **CROSS-SELL OPPORTUNITIES**
-                    
-                    **Ready to Upgrade:**
-                    • 18 auto customers eligible for home insurance
-                    • 12 homeowners need life insurance review
-                    • 8 business owners missing key coverage
-                    
-                    **💡 Smart Recommendations:**
-                    • Bundle discounts available for 25 customers
-                    • Life insurance perfect for 15 families with young children
-                    • Umbrella policies needed for 10 high-asset customers
-                    
-                    ## 🚨 **CLAIMS IN PROGRESS**
-                    
-                    **Active Claims (7 total):**
-                    • Michael Chen - Auto collision - Ready for approval
-                    • Davis Family - Hail damage - Waiting on adjuster
-                    • Johnson Contracting - Equipment theft - Under investigation
-                    
-                    **Average Processing Time:** 3.2 days (Industry: 5.1 days)
-                    
-                    ## 📈 **PERFORMANCE METRICS**
-                    
-                    **Customer Satisfaction:** 4.7/5.0
-                    **Claims Approval Rate:** 94%
-                    **Average Response Time:** 2.1 hours
-                    **Policy Accuracy Rate:** 99.2%
-                    
-                    What specific policy task can I help you with today?
-                `;
-            }
-            
-            // Claims Processing
-            if (lowerMessage.includes('claim') || lowerMessage.includes('process')) {
-                return `
-                    🚗 **CLAIMS PROCESSING CENTER**
-                    
-                    ## 📋 **ACTIVE CLAIMS SUMMARY**
-                    • **Total Open Claims:** 7
-                    • **Average Processing Time:** 3.2 days (vs industry 5.1 days)
-                    • **Pending Approval Amount:** $12,450
-                    • **Customer Satisfaction:** 4.8/5.0
-                    
-                    ## 🔥 **PRIORITY CLAIM: Michael Chen**
-                    
-                    **Claim Details:**
-                    • **Claim #:** 2025-001
-                    • **Incident Type:** Rear-end collision
-                    • **Date of Loss:** July 25, 2025
-                    • **Estimated Damage:** $2,850
-                    • **Deductible:** $500
-                    • **Net Payout:** $2,350
-                    
-                    **Investigation Status:** ✅ Complete
-                    • Photos reviewed and approved
-                    • Police report confirms other driver at fault
-                    • Repair estimate from certified shop
-                    • No fraud indicators detected
-                    
-                    **✅ RECOMMENDATION: APPROVE IMMEDIATELY**
-                    *Clear liability, damage consistent with incident, excellent customer history*
-                    
-                    ## 📊 **OTHER ACTIVE CLAIMS**
-                    
-                    **Johnson, Sarah** - Hail Damage
-                    • Amount: $1,200 • Status: Needs adjuster visit
-                    • Action: Schedule inspection this week
-                    
-                    **Williams, Mike** - Vehicle Theft
-                    • Amount: $8,500 • Status: Police report pending
-                    • Action: Follow up with police department
-                    
-                    **Davis, Lisa** - Windshield Replacement
-                    • Amount: $350 • Status: Ready for auto-approval
-                    • Action: Process immediately
-                    
-                    ## 📈 **CLAIMS ANALYTICS**
-                    
-                    **This Month Performance:**
-                    • Claims processed: 15
-                    • Average approval time: 2.1 days
-                    • Customer satisfaction: 96%
-                    • Fraud detected: 0 cases
-                    
-                    **⚠️ Fraud Alert Status:** All clear - no suspicious patterns detected
-                    
-                    ## 🎯 **RECOMMENDED ACTIONS**
-                    
-                    1. **Approve Michael Chen** - builds customer loyalty
-                    2. **Auto-approve Lisa Davis** - routine windshield claim
-                    3. **Schedule Sarah Johnson** - adjuster visit needed
-                    4. **Follow up Mike Williams** - theft report status
-                    
-                    **💰 Processing Impact:** Quick approvals improve customer retention by 23%
-                    
-                    Would you like me to process Michael Chen's claim approval or handle another claims task?
-                `;
-            }
-            
-            // Default intelligent response
-            return `
-                👋 **AI BUSINESS ASSISTANT READY**
-                
-                I'm your intelligent automation system for AIP Best Rate Insurance, designed to save you 20+ hours weekly on administrative tasks.
-                
-                ## 🚀 **CORE CAPABILITIES**
-                
-                **📝 Document Generation**
-                • Auto, home, life insurance forms in 30 seconds
-                • Custom quotes with real-time rate calculations
-                • Policy renewals and amendments
-                
-                **🔍 Smart Customer Management**
-                • Instant customer lookups with complete history
-                • Payment tracking and renewal alerts
-                • Cross-sell opportunity identification
-                
-                **📊 Business Intelligence**
-                • Real-time performance dashboards
-                • Revenue tracking and forecasting
-                • Task prioritization and scheduling
-                
-                ## 🎯 **POPULAR COMMANDS**
-                
-                Try saying:
-                • *"Generate auto insurance form for [customer name]"*
-                • *"Find customer [name]"*
-                • *"Show me today's tasks"*
-                • *"Generate business report"*
-                • *"Process this claim"*
-                
-                ## 💡 **BUSINESS IMPACT**
-                
-                ✅ **Save 20+ hours weekly** on administrative tasks
-                ✅ **Increase accuracy** with automated form generation
-                ✅ **Never miss renewals** with smart follow-up system
-                ✅ **Boost revenue** by focusing on high-value activities
-                
-                **🎯 Ready to get started?** Ask me to help with any specific task, or click one of the Quick Actions to see what I can do!
-                
-                What would you like me to help you with first?
-            `;
-        }
-        
-        // Auto-focus input on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('messageInput').focus();
-        });
-    </script>
-</body>
-</html>margin: 0;
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
@@ -340,7 +81,6 @@
             transform: translateY(-1px);
         }
         
-        /* Demo Interface Styles */
         .header {
             background: #1e40af;
             color: white;
@@ -523,12 +263,6 @@
             background: #1d4ed8;
         }
         
-        .send-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-        
-        /* Form Generation Styles */
         .generated-form {
             background: #f0f9ff;
             border: 2px solid #3b82f6;
@@ -547,10 +281,6 @@
             border-radius: 10px 10px 0 0;
             font-weight: bold;
             text-align: center;
-        }
-        
-        .form-section {
-            margin-bottom: 1.5rem;
         }
         
         .form-section h4 {
@@ -587,16 +317,6 @@
             margin-top: 1rem;
         }
         
-        .loading {
-            display: none;
-            color: #6b7280;
-            font-style: italic;
-        }
-        
-        .loading.show {
-            display: block;
-        }
-        
         @media (max-width: 1200px) {
             .demo-container {
                 grid-template-columns: 1fr;
@@ -612,56 +332,39 @@
 </head>
 <body>
     <div class="demo-container">
-        <!-- Demo Guide Panel -->
         <div class="guide-panel">
             <h2 class="guide-title">🎯 Clint's Insurance Demo</h2>
             
             <div class="demo-scenario">
                 <h4>🔥 Opening Hook</h4>
-                <p><strong>Say:</strong> "Clint, I want to show you something that will save you 20+ hours a week. This AI assistant handles all those time-consuming tasks that keep you from focusing on sales."</p>
-                <button class="quick-test-btn" onclick="testScenario('hello')">Test Opening</button>
+                <p><strong>Say:</strong> "Clint, I want to show you something that will save you 20+ hours a week."</p>
+                <button class="quick-test-btn" onclick="runDemo('hello')">Test Opening</button>
             </div>
             
             <div class="demo-scenario">
                 <h4>📝 Form Generation Demo</h4>
-                <p><strong>Say:</strong> "Watch this - instead of spending 15 minutes creating an auto insurance form, I can do it in 10 seconds."</p>
-                <p><strong>Type:</strong> "Generate auto insurance form for John Smith"</p>
-                <button class="quick-test-btn" onclick="testScenario('Generate auto insurance form for John Smith')">Test Form Generation</button>
+                <p><strong>Say:</strong> "Watch this - instead of 15 minutes creating a form, I can do it in 10 seconds."</p>
+                <button class="quick-test-btn" onclick="runDemo('Generate auto insurance form for John Smith')">Test Form Generation</button>
             </div>
             
             <div class="demo-scenario">
                 <h4>🔍 Customer Lookup Demo</h4>
                 <p><strong>Say:</strong> "Need to find a customer? No more digging through files."</p>
-                <p><strong>Type:</strong> "Find customer John Smith"</p>
-                <button class="quick-test-btn" onclick="testScenario('Find customer John Smith')">Test Customer Lookup</button>
+                <button class="quick-test-btn" onclick="runDemo('Find customer John Smith')">Test Customer Lookup</button>
             </div>
             
             <div class="demo-scenario">
                 <h4>📊 Business Report Demo</h4>
-                <p><strong>Say:</strong> "Here's how you get instant business insights instead of spending hours on spreadsheets."</p>
-                <p><strong>Type:</strong> "Generate my daily business report"</p>
-                <button class="quick-test-btn" onclick="testScenario('Generate my daily business report')">Test Report Generation</button>
-            </div>
-            
-            <div class="demo-scenario">
-                <h4>📅 Task Management Demo</h4>
-                <p><strong>Say:</strong> "Never miss a follow-up or renewal again."</p>
-                <p><strong>Type:</strong> "Show me my tasks for today"</p>
-                <button class="quick-test-btn" onclick="testScenario('Show me my tasks for today')">Test Task Management</button>
+                <p><strong>Say:</strong> "Here's how you get instant business insights."</p>
+                <button class="quick-test-btn" onclick="runDemo('Generate my daily business report')">Test Report</button>
             </div>
             
             <div class="demo-scenario">
                 <h4>💰 ROI Close</h4>
-                <p><strong>Say:</strong> "This saves you 20+ hours weekly. At your hourly rate, that's $8,000+ monthly value for just $1,000 investment. It literally pays for itself in the first week."</p>
-            </div>
-            
-            <div class="demo-scenario">
-                <h4>🎯 Closing Question</h4>
-                <p><strong>Ask:</strong> "What specific task takes up most of your time that you'd love to automate first?"</p>
+                <p><strong>Say:</strong> "This saves you 20+ hours weekly. At your rate, that's $8,000+ monthly value for $1,000 investment."</p>
             </div>
         </div>
         
-        <!-- Live Demo Panel -->
         <div class="demo-panel">
             <div class="header">
                 <div>
@@ -677,20 +380,20 @@
                 <div class="sidebar">
                     <h3>⚡ Quick Actions</h3>
                     <div class="quick-actions">
-                        <button class="action-btn" onclick="quickAction('Generate auto insurance form')">📝 Generate Auto Insurance Form</button>
-                        <button class="action-btn" onclick="quickAction('Find customer John Smith')">🔍 Customer Lookup</button>
-                        <button class="action-btn" onclick="quickAction('Generate my daily business report')">📊 Daily Business Report</button>
-                        <button class="action-btn" onclick="quickAction('Show me my tasks for today')">📅 Today\'s Tasks</button>
-                        <button class="action-btn" onclick="quickAction('Help me with policy management')">📋 Policy Management</button>
-                        <button class="action-btn" onclick="quickAction('I need help processing a claim')">🚗 Claims Processing</button>
+                        <button class="action-btn" onclick="runDemo('Generate auto insurance form')">📝 Generate Auto Form</button>
+                        <button class="action-btn" onclick="runDemo('Find customer John Smith')">🔍 Customer Lookup</button>
+                        <button class="action-btn" onclick="runDemo('Generate my daily business report')">📊 Business Report</button>
+                        <button class="action-btn" onclick="runDemo('Show me my tasks for today')">📅 Today's Tasks</button>
+                        <button class="action-btn" onclick="runDemo('Help me with policy management')">📋 Policy Management</button>
+                        <button class="action-btn" onclick="runDemo('Process a claim')">🚗 Claims Processing</button>
                     </div>
                     
-                    <div style="margin-top: 2rem; padding: 1rem; background: #ecfdf5; border-radius: 6px; border: 1px solid #a7f3d0;">
+                    <div style="margin-top: 2rem; padding: 1rem; background: #ecfdf5; border-radius: 6px;">
                         <h4 style="margin: 0 0 0.5rem 0; color: #065f46; font-size: 0.9rem;">💡 Demo Tips</h4>
                         <div style="font-size: 0.8rem; color: #065f46;">
-                            <div>✅ Shows real business value</div>
-                            <div>✅ Handles actual workflows</div>
+                            <div>✅ Shows real value</div>
                             <div>✅ Saves 20+ hours weekly</div>
+                            <div>✅ 700%+ ROI</div>
                         </div>
                     </div>
                 </div>
@@ -716,8 +419,7 @@
                     <div class="input-area">
                         <div class="input-container">
                             <input type="text" class="message-input" id="messageInput" 
-                                   placeholder="Try: 'Generate auto insurance form for John Smith'" 
-                                   onkeypress="handleKeyPress(event)">
+                                   placeholder="Try: 'Generate auto insurance form for John Smith'">
                             <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
                         </div>
                     </div>
@@ -727,20 +429,9 @@
     </div>
 
     <script>
-        function testScenario(message) {
+        function runDemo(message) {
             document.getElementById('messageInput').value = message;
             sendMessage();
-        }
-        
-        function quickAction(action) {
-            document.getElementById('messageInput').value = action;
-            sendMessage();
-        }
-        
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
         }
         
         function sendMessage() {
@@ -748,14 +439,11 @@
             const message = input.value.trim();
             if (!message) return;
             
-            // Add user message
             addMessage(message, 'user');
             input.value = '';
             
-            // Show loading
             showLoading();
             
-            // Generate AI response
             setTimeout(() => {
                 hideLoading();
                 const response = generateResponse(message);
@@ -766,19 +454,18 @@
         function addMessage(content, type) {
             const messagesDiv = document.getElementById('messages');
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
+            messageDiv.className = 'message ' + type;
             
             const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             
-            messageDiv.innerHTML = `
-                <div class="avatar ${type}">${type === 'user' ? '👤' : '🤖'}</div>
-                <div class="message-bubble">
-                    ${content}
-                    <div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">
-                        ${time}
-                    </div>
-                </div>
-            `;
+            messageDiv.innerHTML = 
+                '<div class="avatar ' + type + '">' + (type === 'user' ? '👤' : '🤖') + '</div>' +
+                '<div class="message-bubble">' +
+                    content +
+                    '<div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">' +
+                        time +
+                    '</div>' +
+                '</div>';
             
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
@@ -789,15 +476,14 @@
             const loadingDiv = document.createElement('div');
             loadingDiv.className = 'message ai';
             loadingDiv.id = 'loading-message';
-            loadingDiv.innerHTML = `
-                <div class="avatar ai">🤖</div>
-                <div class="message-bubble">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <div style="width: 8px; height: 8px; background: #059669; border-radius: 50%; animation: pulse 1s infinite;"></div>
-                        Processing your request...
-                    </div>
-                </div>
-            `;
+            loadingDiv.innerHTML = 
+                '<div class="avatar ai">🤖</div>' +
+                '<div class="message-bubble">' +
+                    '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+                        '<div style="width: 8px; height: 8px; background: #059669; border-radius: 50%; animation: pulse 1s infinite;"></div>' +
+                        'Processing your request...' +
+                    '</div>' +
+                '</div>';
             messagesDiv.appendChild(loadingDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
@@ -812,200 +498,124 @@
         function generateResponse(userMessage) {
             const lowerMessage = userMessage.toLowerCase();
             
-            // Auto Insurance Form Generation with REAL form
             if (lowerMessage.includes('form') && (lowerMessage.includes('auto') || lowerMessage.includes('car'))) {
-                return `
-                    ✅ **AUTO INSURANCE APPLICATION GENERATED**
-                    
-                    <div class="generated-form">
-                        <div class="form-header">
-                            🏢 AIP BEST RATE INSURANCE<br>
-                            AUTO INSURANCE APPLICATION
-                        </div>
-                        
-                        <div class="form-section">
-                            <h4>📋 APPLICANT INFORMATION</h4>
-                            <div class="form-field">
-                                <span class="field-label">Full Name:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? 'John Smith' : '[Customer Name]'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Date of Birth:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '03/15/1985' : '__/__/____'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Driver's License #:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? 'LA-456789123' : '_______________'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Phone Number:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '(318) 555-0123' : '(___) ___-____'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Email Address:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? 'john.smith@email.com' : '________________'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Address:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '1234 Oak Street, Shreveport, LA 71101' : '________________'}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h4>🚗 VEHICLE INFORMATION</h4>
-                            <div class="form-field">
-                                <span class="field-label">Year / Make / Model:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '2021 Honda Accord LX' : '____/_______/_______'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">VIN Number:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '1HGCV1F13MA123456' : '___________________'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Current Mileage:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '28,450 miles' : '_________'}</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Primary Use:</span>
-                                <span class="field-input">${lowerMessage.includes('john smith') ? '☑ Personal ☐ Business ☐ Commute' : '☐ Personal ☐ Business ☐ Commute'}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="form-section">
-                            <h4>🛡️ COVERAGE SELECTION</h4>
-                            <div class="form-field">
-                                <span class="field-label">Bodily Injury Liability:</span>
-                                <span class="field-input">☑ $25,000/$50,000</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Property Damage Liability:</span>
-                                <span class="field-input">☑ $25,000</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Collision Coverage:</span>
-                                <span class="field-input">☑ $500 Deductible</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Comprehensive Coverage:</span>
-                                <span class="field-input">☑ $500 Deductible</span>
-                            </div>
-                            <div class="form-field">
-                                <span class="field-label">Uninsured Motorist:</span>
-                                <span class="field-input">☑ $25,000/$50,000</span>
-                            </div>
-                        </div>
-                        
-                        <div class="premium-highlight">
-                            💰 ESTIMATED ANNUAL PREMIUM: $1,247
-                            <br>📅 Monthly Payment: $103.92
-                        </div>
-                    </div>
-                    
-                    **⚡ Time Saved:** 15 minutes → 30 seconds<br>
-                    **📧 Next Steps:** Form is ready to email to customer or print for signature<br>
-                    **🔄 Actions Available:** Generate quote, schedule follow-up, send to customer
-                    
-                    Would you like me to customize this form further or generate additional documentation?
-                `;
+                return '✅ <strong>AUTO INSURANCE APPLICATION GENERATED</strong>' +
+                    '<div class="generated-form">' +
+                        '<div class="form-header">🏢 AIP BEST RATE INSURANCE<br>AUTO INSURANCE APPLICATION</div>' +
+                        '<div class="form-section">' +
+                            '<h4>📋 APPLICANT INFORMATION</h4>' +
+                            '<div class="form-field"><span class="field-label">Full Name:</span><span class="field-input">John Smith</span></div>' +
+                            '<div class="form-field"><span class="field-label">Date of Birth:</span><span class="field-input">03/15/1985</span></div>' +
+                            '<div class="form-field"><span class="field-label">Phone:</span><span class="field-input">(318) 555-0123</span></div>' +
+                            '<div class="form-field"><span class="field-label">Address:</span><span class="field-input">1234 Oak Street, Shreveport, LA</span></div>' +
+                        '</div>' +
+                        '<div class="form-section">' +
+                            '<h4>🚗 VEHICLE INFORMATION</h4>' +
+                            '<div class="form-field"><span class="field-label">Year/Make/Model:</span><span class="field-input">2021 Honda Accord LX</span></div>' +
+                            '<div class="form-field"><span class="field-label">VIN:</span><span class="field-input">1HGCV1F13MA123456</span></div>' +
+                        '</div>' +
+                        '<div class="premium-highlight">💰 ESTIMATED PREMIUM: $1,247/year</div>' +
+                    '</div>' +
+                    '<strong>⚡ Time Saved:</strong> 15 minutes → 30 seconds<br>' +
+                    '<strong>📧 Next Steps:</strong> Form ready to email or print';
             }
             
-            // Customer Lookup with detailed info
             if (lowerMessage.includes('customer') || lowerMessage.includes('find') || lowerMessage.includes('john smith')) {
-                return `
-                    🔍 **CUSTOMER DATABASE SEARCH COMPLETE**
-                    
-                    **FOUND: John Smith** ✅
-                    
-                    📊 **CUSTOMER PROFILE:**
-                    • **Policy Number:** AIP-2024-JS-001
-                    • **Coverage Type:** Auto Insurance (Full Coverage)
-                    • **Premium:** $1,247/year ($103.92/month)
-                    • **Payment Status:** ✅ Current (Auto-pay enabled)
-                    • **Next Payment:** August 15, 2025
-                    • **Policy Renewal:** March 2026
-                    
-                    📈 **ACCOUNT HISTORY:**
-                    • **Customer Since:** March 2018 (7+ years)
-                    • **Claims History:** 1 windshield claim (2023) - $350 approved
-                    • **Payment History:** Excellent (0 late payments)
-                    • **Referrals:** 2 successful referrals (earned $100 credit)
-                    
-                    📞 **CONTACT INFORMATION:**
-                    • **Phone:** (318) 555-0123
-                    • **Email:** john.smith@email.com
-                    • **Address:** 1234 Oak Street, Shreveport, LA 71101
-                    • **Preferred Contact:** Email
-                    
-                    🎯 **OPPORTUNITIES:**
-                    • **Home Insurance:** No current policy (potential cross-sell)
-                    • **Life Insurance:** Single, no dependents (future opportunity)
-                    • **Business Insurance:** Works from home office (potential need)
-                    
-                    💼 **AGENT NOTES:**
-                    "Excellent customer - always pays on time, very friendly, great referral source. Mentioned buying a house soon - follow up on homeowner's insurance."
-                    
-                    **⚡ Quick Actions Available:**
-                    🔄 Process payment | 📧 Send policy docs | 📞 Schedule call | 🏠 Quote home insurance
-                    
-                    **Time Saved:** 5+ minutes of file searching → Instant results
-                `;
+                return '🔍 <strong>CUSTOMER FOUND: John Smith</strong> ✅<br><br>' +
+                    '📊 <strong>CUSTOMER PROFILE:</strong><br>' +
+                    '• Policy: AIP-2024-JS-001<br>' +
+                    '• Premium: $1,247/year ($103.92/month)<br>' +
+                    '• Status: ✅ Current (Auto-pay enabled)<br>' +
+                    '• Customer Since: March 2018 (7+ years)<br>' +
+                    '• Claims: 1 windshield (2023) - $350 approved<br><br>' +
+                    '🎯 <strong>OPPORTUNITIES:</strong><br>' +
+                    '• Home Insurance: No current policy<br>' +
+                    '• Mentioned buying house soon<br><br>' +
+                    '<strong>⚡ Time Saved:</strong> 5+ minutes → Instant results';
             }
             
-            // Business Report Generation
             if (lowerMessage.includes('report') || lowerMessage.includes('business') || lowerMessage.includes('daily')) {
-                return `
-                    📊 **AIP BEST RATE INSURANCE - BUSINESS DASHBOARD**
-                    *Generated: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}*
-                    
-                    ## 💰 **REVENUE METRICS (August 2025)**
-                    
-                    **📈 This Month Performance:**
-                    • **Total Premium Revenue:** $89,340 (+12% vs July)
-                    • **New Policies Written:** 47 policies
-                    • **Average Policy Value:** $1,901
-                    • **Commission Earned:** $13,401
-                    • **Renewal Rate:** 91% (Industry avg: 85%)
-                    
-                    ## 🎯 **TODAY'S PRIORITIES**
-                    
-                    **🔥 URGENT (Revenue Impact):**
-                    1. **Sarah Johnson** - Policy renewal expires TODAY ($2,100 annual premium)
-                    2. **3 Hot Prospects** - Follow up on quotes sent this week (potential $4,200 revenue)
-                    3. **Michael Chen** - Auto claim ready for quick approval (customer satisfaction)
-                    
-                    **📞 SCHEDULED ACTIVITIES:**
-                    • **10:00 AM** - New customer consultation (Maria Rodriguez)
-                    • **2:30 PM** - Claims review meeting
-                    • **4:00 PM** - Thompson family policy renewal call
-                    
-                    ## 📈 **GROWTH OPPORTUNITIES**
-                    
-                    **Cross-Sell Pipeline:**
-                    • **15 auto customers** eligible for home insurance quotes
-                    • **8 customers** perfect for life insurance (new families)
-                    • **12 customers** due for policy upgrades
-                    
-                    **💡 Smart Recommendations:**
-                    1. **High Priority:** Call Sarah Johnson first - she's been loyal 8 years, offer loyalty discount
-                    2. **Quick Win:** Auto-approve Michael Chen's claim - straightforward case
-                    3. **Revenue Boost:** Bundle home insurance quotes for Oak Street project customers
-                    
-                    ## 🏆 **PERFORMANCE HIGHLIGHTS**
-                    
-                    **This Week Achievements:**
-                    ✅ Closed 3 new policies ($5,700 annual premium)
-                    ✅ Zero customer complaints
-                    ✅ 4.8/5.0 customer satisfaction score
-                    ✅ Beat monthly target by 15%
-                    
-                    **📊 Compared to Last Month:**
-                    • New policies: +23%
-                    • Customer retention: +6%
-                    • Average deal size: +8%
-                    
-                    **⏰ Time Saved This Month:** 47 hours through AI automation
-                    **💵 Value of Time Saved:** $4,700 (based on $100/hour rate)
-                    
-                    **🚀 Next Actions:** Focus on the 3 hot prospects - potential to close $4,200 in new business this week!
-                `;
+                return '📊 <strong>AIP BEST RATE INSURANCE - BUSINESS DASHBOARD</strong><br>' +
+                    '<em>Generated: ' + new Date().toLocaleDateString() + '</em><br><br>' +
+                    '💰 <strong>AUGUST 2025 PERFORMANCE:</strong><br>' +
+                    '• Total Premium Revenue: $89,340 (+12% vs July)<br>' +
+                    '• New Policies: 47<br>' +
+                    '• Commission Earned: $13,401<br>' +
+                    '• Renewal Rate: 91%<br><br>' +
+                    '🔥 <strong>TODAY\'S PRIORITIES:</strong><br>' +
+                    '1. Sarah Johnson - Policy expires TODAY ($2,100)<br>' +
+                    '2. Follow up 3 hot prospects ($4,200 potential)<br>' +
+                    '3. Michael Chen - Auto claim approval<br><br>' +
+                    '⏰ <strong>Time Saved This Month:</strong> 47 hours<br>' +
+                    '💵 <strong>Value:</strong> $4,700 (at $100/hour)';
             }
+            
+            if (lowerMessage.includes('task') || lowerMessage.includes('today')) {
+                return '📅 <strong>TODAY\'S PRIORITY TASKS</strong><br><br>' +
+                    '🔥 <strong>URGENT:</strong><br>' +
+                    '1. Call Sarah Johnson - Policy expires TODAY<br>' +
+                    '2. Follow up 3 hot prospects from Monday<br><br>' +
+                    '📞 <strong>SCHEDULED:</strong><br>' +
+                    '• 10:00 AM - New customer (Maria Rodriguez)<br>' +
+                    '• 2:30 PM - Claims review meeting<br>' +
+                    '• 4:00 PM - Thompson renewal call<br><br>' +
+                    '🎯 <strong>Daily Goal:</strong> $6,300 in renewals/new business';
+            }
+            
+            if (lowerMessage.includes('policy') || lowerMessage.includes('management')) {
+                return '📋 <strong>POLICY MANAGEMENT CENTER</strong><br><br>' +
+                    '📊 <strong>PORTFOLIO:</strong><br>' +
+                    '• Active Policies: 342 total<br>' +
+                    '• Monthly Premium: $127,450<br>' +
+                    '• Distribution: Auto (65%), Home (20%)<br><br>' +
+                    '🔄 <strong>RENEWALS THIS WEEK:</strong><br>' +
+                    '• Sarah Johnson - Auto (expires today)<br>' +
+                    '• Miller Family - Home (expires Thu)<br>' +
+                    '• Tech Solutions - Business (expires Fri)<br><br>' +
+                    '🎯 <strong>CROSS-SELL OPPORTUNITIES:</strong><br>' +
+                    '• 18 auto customers eligible for home insurance<br>' +
+                    '• 12 homeowners need life insurance review';
+            }
+            
+            if (lowerMessage.includes('claim') || lowerMessage.includes('process')) {
+                return '🚗 <strong>CLAIMS PROCESSING CENTER</strong><br><br>' +
+                    '📋 <strong>ACTIVE CLAIMS:</strong> 7 total<br>' +
+                    '⚡ <strong>Average Processing:</strong> 3.2 days (vs 5.1 industry)<br><br>' +
+                    '🔥 <strong>PRIORITY: Michael Chen</strong><br>' +
+                    '• Incident: Rear-end collision<br>' +
+                    '• Damage: $2,850<br>' +
+                    '• Status: ✅ Ready for approval<br>' +
+                    '• Recommendation: APPROVE IMMEDIATELY<br><br>' +
+                    '📈 <strong>THIS MONTH:</strong><br>' +
+                    '• Claims processed: 15<br>' +
+                    '• Customer satisfaction: 96%<br>' +
+                    '• Fraud detected: 0 cases';
+            }
+            
+            return '👋 <strong>AI BUSINESS ASSISTANT READY</strong><br><br>' +
+                'I\'m designed to save you 20+ hours weekly on administrative tasks.<br><br>' +
+                '🚀 <strong>TRY THESE COMMANDS:</strong><br>' +
+                '• "Generate auto insurance form for [name]"<br>' +
+                '• "Find customer [name]"<br>' +
+                '• "Show me today\'s tasks"<br>' +
+                '• "Generate business report"<br><br>' +
+                '💡 <strong>BUSINESS IMPACT:</strong><br>' +
+                '✅ Save 20+ hours weekly<br>' +
+                '✅ 95% error reduction<br>' +
+                '✅ 700%+ ROI<br><br>' +
+                'What would you like me to help you with first?';
+        }
+        
+        // Enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('messageInput');
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            input.focus();
+        });
+    </script>
+</body>
+</html>
