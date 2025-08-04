@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Assistant - Insurance Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            min-height: 100vh;
+        }
+        
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            height: 100vh;
+            gap: 0;
+        }
+        
+        .guide-panel {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .demo-panel {
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 0.5rem;
+        }
+        
+        .demo-scenario {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .demo-scenario h4 {
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-scenario p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+        
+        .quick-test-btn {
+            background: #fbbf24;
+            color: #1e40af;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-test-btn:hover {
+            background: #f59e0b;
+            transform: translateY(-1px);
+        }
+        
+        .header {
+            background: #1e40af;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .header .date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+        }
+        
+        .sidebar {
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+        
+        .sidebar h3 {
+            color: #374151;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.75rem;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.85rem;
+            color: #374151;
+            transition: all 0.2s;
+        }
+        
+        .action-btn:hover {
+            background: #e5e7eb;
+            border-color: #1e40af;
+            transform: translateY(-1px);
+        }
+        
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            background: #fcfcfc;
+        }
+        
+        .chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #fafafa;
+        }
+        
+        .chat-header h2 {
+            color: #374151;
+            font-size: 1.1rem;
+        }
+        
+        .messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: 500px;
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .avatar.user {
+            background: #1e40af;
+            color: white;
+        }
+        
+        .avatar.ai {
+            background: #059669;
+            color: white;
+        }
+        
+        .message-bubble {
+            max-width: 75%;
+            padding: 1rem 1.25rem;
+            border-radius: 16px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .message.user .message-bubble {
+            background: #1e40af;
+            color: white;
+        }
+        
+        .message.ai .message-bubble {
+            background: white;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: inherit;
+            background: #fafafa;
+        }
+        
+        .message-input:focus {
+            border-color: #1e40af;
+            background: white;
+        }
+        
+        .send-btn {
+            padding: 0.75rem 1.5rem;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .send-btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .generated-form {
+            background: #f0f9ff;
+            border: 2px solid #3b82f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .form-header {
+            background: #1e40af;
+            color: white;
+            padding: 1rem;
+            margin: -1.5rem -1.5rem 1rem -1.5rem;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .form-section h4 {
+            color: #1e40af;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid #3b82f6;
+            padding-bottom: 0.25rem;
+        }
+        
+        .form-field {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .field-label {
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .field-input {
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        .premium-highlight {
+            background: #22c55e;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .demo-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr;
+            }
+            
+            .guide-panel {
+                max-height: 30vh;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="guide-panel">
+            <h2 class="guide-title">🎯 Clint's Insurance Demo</h2>
+            
+            <div class="demo-scenario">
+                <h4>🔥 Opening Hook</h4>
+                <p><strong>Say:</strong> "Clint, I want to show you something that will save you 20+ hours a week."</p>
+                <button class="quick-test-btn" onclick="runDemo('hello')">Test Opening</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>📝 Form Generation Demo</h4>
+                <p><strong>Say:</strong> "Watch this - instead of 15 minutes creating a form, I can do it in 10 seconds."</p>
+                <button class="quick-test-btn" onclick="runDemo('Generate auto insurance form for John Smith')">Test Form Generation</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>🔍 Customer Lookup Demo</h4>
+                <p><strong>Say:</strong> "Need to find a customer? No more digging through files."</p>
+                <button class="quick-test-btn" onclick="runDemo('Find customer John Smith')">Test Customer Lookup</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>📊 Business Report Demo</h4>
+                <p><strong>Say:</strong> "Here's how you get instant business insights."</p>
+                <button class="quick-test-btn" onclick="runDemo('Generate my daily business report')">Test Report</button>
+            </div>
+            
+            <div class="demo-scenario">
+                <h4>💰 ROI Close</h4>
+                <p><strong>Say:</strong> "This saves you 20+ hours weekly. At your rate, that's $8,000+ monthly value for $1,000 investment."</p>
+            </div>
+        </div>
+        
+        <div class="demo-panel">
+            <div class="header">
+                <div>
+                    <h1>AIP Best Rate Insurance - AI Assistant</h1>
+                    <div class="date">Demo Portal • August 2, 2025</div>
+                </div>
+                <div style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    🟢 LIVE DEMO
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="sidebar">
+                    <h3>⚡ Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="action-btn" onclick="runDemo('Generate auto insurance form')">📝 Generate Auto Form</button>
+                        <button class="action-btn" onclick="runDemo('Find customer John Smith')">🔍 Customer Lookup</button>
+                        <button class="action-btn" onclick="runDemo('Generate my daily business report')">📊 Business Report</button>
+                        <button class="action-btn" onclick="runDemo('Show me my tasks for today')">📅 Today's Tasks</button>
+                        <button class="action-btn" onclick="runDemo('Help me with policy management')">📋 Policy Management</button>
+                        <button class="action-btn" onclick="runDemo('Process a claim')">🚗 Claims Processing</button>
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1rem; background: #ecfdf5; border-radius: 6px;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #065f46; font-size: 0.9rem;">💡 Demo Tips</h4>
+                        <div style="font-size: 0.8rem; color: #065f46;">
+                            <div>✅ Shows real value</div>
+                            <div>✅ Saves 20+ hours weekly</div>
+                            <div>✅ 700%+ ROI</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-area">
+                    <div class="chat-header">
+                        <h2>🤖 AI Business Assistant</h2>
+                        <p style="margin: 0.25rem 0 0 0; color: #6b7280; font-size: 0.85rem;">Ready to handle your insurance operations</p>
+                    </div>
+                    
+                    <div class="messages" id="messages">
+                        <div class="message ai">
+                            <div class="avatar ai">🤖</div>
+                            <div class="message-bubble">
+                                Good morning, Clint! Welcome to AIP Best Rate Insurance Management System. I'm your AI Business Assistant, ready to help streamline your daily operations. How can I assist you today?
+                                <div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">
+                                    9:15 AM
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-area">
+                        <div class="input-container">
+                            <input type="text" class="message-input" id="messageInput" 
+                                   placeholder="Try: 'Generate auto insurance form for John Smith'">
+                            <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function runDemo(message) {
+            document.getElementById('messageInput').value = message;
+            sendMessage();
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            showLoading();
+            
+            setTimeout(() => {
+                hideLoading();
+                const response = generateResponse(message);
+                addMessage(response, 'ai');
+            }, 1500);
+        }
+        
+        function addMessage(content, type) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            messageDiv.innerHTML = 
+                '<div class="avatar ' + type + '">' + (type === 'user' ? '👤' : '🤖') + '</div>' +
+                '<div class="message-bubble">' +
+                    content +
+                    '<div style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">' +
+                        time +
+                    '</div>' +
+                '</div>';
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showLoading() {
+            const messagesDiv = document.getElementById('messages');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message ai';
+            loadingDiv.id = 'loading-message';
+            loadingDiv.innerHTML = 
+                '<div class="avatar ai">🤖</div>' +
+                '<div class="message-bubble">' +
+                    '<div style="display: flex; align-items: center; gap: 0.5rem;">' +
+                        '<div style="width: 8px; height: 8px; background: #059669; border-radius: 50%; animation: pulse 1s infinite;"></div>' +
+                        'Processing your request...' +
+                    '</div>' +
+                '</div>';
+            messagesDiv.appendChild(loadingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideLoading() {
+            const loading = document.getElementById('loading-message');
+            if (loading) {
+                loading.remove();
+            }
+        }
+        
+        function generateResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            if (lowerMessage.includes('form') && (lowerMessage.includes('auto') || lowerMessage.includes('car'))) {
+                return '✅ <strong>AUTO INSURANCE APPLICATION GENERATED</strong>' +
+                    '<div class="generated-form">' +
+                        '<div class="form-header">🏢 AIP BEST RATE INSURANCE<br>AUTO INSURANCE APPLICATION</div>' +
+                        '<div class="form-section">' +
+                            '<h4>📋 APPLICANT INFORMATION</h4>' +
+                            '<div class="form-field"><span class="field-label">Full Name:</span><span class="field-input">John Smith</span></div>' +
+                            '<div class="form-field"><span class="field-label">Date of Birth:</span><span class="field-input">03/15/1985</span></div>' +
+                            '<div class="form-field"><span class="field-label">Phone:</span><span class="field-input">(318) 555-0123</span></div>' +
+                            '<div class="form-field"><span class="field-label">Address:</span><span class="field-input">1234 Oak Street, Shreveport, LA</span></div>' +
+                        '</div>' +
+                        '<div class="form-section">' +
+                            '<h4>🚗 VEHICLE INFORMATION</h4>' +
+                            '<div class="form-field"><span class="field-label">Year/Make/Model:</span><span class="field-input">2021 Honda Accord LX</span></div>' +
+                            '<div class="form-field"><span class="field-label">VIN:</span><span class="field-input">1HGCV1F13MA123456</span></div>' +
+                        '</div>' +
+                        '<div class="premium-highlight">💰 ESTIMATED PREMIUM: $1,247/year</div>' +
+                    '</div>' +
+                    '<strong>⚡ Time Saved:</strong> 15 minutes → 30 seconds<br>' +
+                    '<strong>📧 Next Steps:</strong> Form ready to email or print';
+            }
+            
+            if (lowerMessage.includes('customer') || lowerMessage.includes('find') || lowerMessage.includes('john smith')) {
+                return '🔍 <strong>CUSTOMER FOUND: John Smith</strong> ✅<br><br>' +
+                    '📊 <strong>CUSTOMER PROFILE:</strong><br>' +
+                    '• Policy: AIP-2024-JS-001<br>' +
+                    '• Premium: $1,247/year ($103.92/month)<br>' +
+                    '• Status: ✅ Current (Auto-pay enabled)<br>' +
+                    '• Customer Since: March 2018 (7+ years)<br>' +
+                    '• Claims: 1 windshield (2023) - $350 approved<br><br>' +
+                    '🎯 <strong>OPPORTUNITIES:</strong><br>' +
+                    '• Home Insurance: No current policy<br>' +
+                    '• Mentioned buying house soon<br><br>' +
+                    '<strong>⚡ Time Saved:</strong> 5+ minutes → Instant results';
+            }
+            
+            if (lowerMessage.includes('report') || lowerMessage.includes('business') || lowerMessage.includes('daily')) {
+                return '📊 <strong>AIP BEST RATE INSURANCE - BUSINESS DASHBOARD</strong><br>' +
+                    '<em>Generated: ' + new Date().toLocaleDateString() + '</em><br><br>' +
+                    '💰 <strong>AUGUST 2025 PERFORMANCE:</strong><br>' +
+                    '• Total Premium Revenue: $89,340 (+12% vs July)<br>' +
+                    '• New Policies: 47<br>' +
+                    '• Commission Earned: $13,401<br>' +
+                    '• Renewal Rate: 91%<br><br>' +
+                    '🔥 <strong>TODAY\'S PRIORITIES:</strong><br>' +
+                    '1. Sarah Johnson - Policy expires TODAY ($2,100)<br>' +
+                    '2. Follow up 3 hot prospects ($4,200 potential)<br>' +
+                    '3. Michael Chen - Auto claim approval<br><br>' +
+                    '⏰ <strong>Time Saved This Month:</strong> 47 hours<br>' +
+                    '💵 <strong>Value:</strong> $4,700 (at $100/hour)';
+            }
+            
+            if (lowerMessage.includes('task') || lowerMessage.includes('today')) {
+                return '📅 <strong>TODAY\'S PRIORITY TASKS</strong><br><br>' +
+                    '🔥 <strong>URGENT:</strong><br>' +
+                    '1. Call Sarah Johnson - Policy expires TODAY<br>' +
+                    '2. Follow up 3 hot prospects from Monday<br><br>' +
+                    '📞 <strong>SCHEDULED:</strong><br>' +
+                    '• 10:00 AM - New customer (Maria Rodriguez)<br>' +
+                    '• 2:30 PM - Claims review meeting<br>' +
+                    '• 4:00 PM - Thompson renewal call<br><br>' +
+                    '🎯 <strong>Daily Goal:</strong> $6,300 in renewals/new business';
+            }
+            
+            if (lowerMessage.includes('policy') || lowerMessage.includes('management')) {
+                return '📋 <strong>POLICY MANAGEMENT CENTER</strong><br><br>' +
+                    '📊 <strong>PORTFOLIO:</strong><br>' +
+                    '• Active Policies: 342 total<br>' +
+                    '• Monthly Premium: $127,450<br>' +
+                    '• Distribution: Auto (65%), Home (20%)<br><br>' +
+                    '🔄 <strong>RENEWALS THIS WEEK:</strong><br>' +
+                    '• Sarah Johnson - Auto (expires today)<br>' +
+                    '• Miller Family - Home (expires Thu)<br>' +
+                    '• Tech Solutions - Business (expires Fri)<br><br>' +
+                    '🎯 <strong>CROSS-SELL OPPORTUNITIES:</strong><br>' +
+                    '• 18 auto customers eligible for home insurance<br>' +
+                    '• 12 homeowners need life insurance review';
+            }
+            
+            if (lowerMessage.includes('claim') || lowerMessage.includes('process')) {
+                return '🚗 <strong>CLAIMS PROCESSING CENTER</strong><br><br>' +
+                    '📋 <strong>ACTIVE CLAIMS:</strong> 7 total<br>' +
+                    '⚡ <strong>Average Processing:</strong> 3.2 days (vs 5.1 industry)<br><br>' +
+                    '🔥 <strong>PRIORITY: Michael Chen</strong><br>' +
+                    '• Incident: Rear-end collision<br>' +
+                    '• Damage: $2,850<br>' +
+                    '• Status: ✅ Ready for approval<br>' +
+                    '• Recommendation: APPROVE IMMEDIATELY<br><br>' +
+                    '📈 <strong>THIS MONTH:</strong><br>' +
+                    '• Claims processed: 15<br>' +
+                    '• Customer satisfaction: 96%<br>' +
+                    '• Fraud detected: 0 cases';
+            }
+            
+            return '👋 <strong>AI BUSINESS ASSISTANT READY</strong><br><br>' +
+                'I\'m designed to save you 20+ hours weekly on administrative tasks.<br><br>' +
+                '🚀 <strong>TRY THESE COMMANDS:</strong><br>' +
+                '• "Generate auto insurance form for [name]"<br>' +
+                '• "Find customer [name]"<br>' +
+                '• "Show me today\'s tasks"<br>' +
+                '• "Generate business report"<br><br>' +
+                '💡 <strong>BUSINESS IMPACT:</strong><br>' +
+                '✅ Save 20+ hours weekly<br>' +
+                '✅ 95% error reduction<br>' +
+                '✅ 700%+ ROI<br><br>' +
+                'What would you like me to help you with first?';
+        }
+        
+        // Enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('messageInput');
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            input.focus();
+        });
+    </script>
+</body>
+</html>
