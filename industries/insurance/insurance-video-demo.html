@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance AI Demo - See It In Action</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .video-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .benefits-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .benefit-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .cta-section {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fbbf24;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .demo-button {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        }
+        
+        .demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.4);
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+            
+            .demo-button {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 See How This Saves You 20+ Hours Weekly</h1>
+            <p>Watch me demonstrate how this AI assistant eliminates administrative burden and transforms your insurance agency operations</p>
+        </div>
+        
+        <div class="video-section">
+            <div class="video-container">
+                <!-- Placeholder for your YouTube video -->
+                <div class="video-placeholder">
+                    <div>
+                        <h3 style="margin-bottom: 1rem;">🎥 Your Demo Video Will Go Here</h3>
+                        <p>Once you upload to YouTube, we'll embed it here</p>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                            (This placeholder will be replaced with your actual video)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- When you're ready, replace the placeholder above with this format:
+                <iframe 
+                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                    title="Insurance AI Demo" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+                -->
+            </div>
+        </div>
+        
+        <div class="benefits-section">
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <div class="benefit-title">20+ Hours Saved Weekly</div>
+                <div class="benefit-text">From endless paperwork to 3 hours of oversight. Focus on sales and client relationships instead of administration.</div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">📝</div>
+                <div class="benefit-title">Instant Form Generation</div>
+                <div class="benefit-text">Auto, home, life insurance forms created in 30 seconds with customer data pre-filled automatically.</div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">🔍</div>
+                <div class="benefit-title">Smart Customer Lookup</div>
+                <div class="benefit-text">Find any customer instantly with complete history, payment status, and cross-sell opportunities.</div>
+            </div>
+        </div>
+        
+        <div class="stats-row">
+            <div class="stat">
+                <div class="stat-number">$90K+</div>
+                <div class="stat-label">Annual Time Value Recovered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">700%+</div>
+                <div class="stat-label">Return on Investment</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">30 sec</div>
+                <div class="stat-label">Form Generation Time</div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>🚀 Ready to Try It Yourself?</h2>
+            <p>Experience the AI assistant firsthand. See how it handles your insurance workflows in real-time.</p>
+            
+            <button class="demo-button" onclick="window.open('insurance-demo.html', '_blank')">
+                🎯 Try the Live Demo Now
+            </button>
+            
+            <div style="margin-top: 2rem; font-size: 1rem; opacity: 0.8;">
+                <p>✅ No signup required • ✅ Fully interactive • ✅ See real results instantly</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
